@@ -2,10 +2,6 @@ package com.epam.mjc.io;
 
 import java.io.*;
 import java.io.IOException;
-import java.util.Arrays;
-
-
-
 
 public class FileReader {
 
@@ -13,23 +9,23 @@ public class FileReader {
         if (file == null) {
             return new Profile();
         }
-        String def = "";
+        StringBuilder def = new StringBuilder();
         try (java.io.FileReader fr = new java.io.FileReader(file))
         {
             int content;
             while ((content = fr.read()) != -1) {
                 if (content != 13) {
-                    def += (char) content;
+                    def.append((char) content);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        def = def.replace("Name: ", "");
-        def = def.replace("Age: ", "");
-        def = def.replace("Email: ", "");
-        def = def.replace("Phone: ", "");
-        String[] result = def.split("\n");
+        def = new StringBuilder(def.toString().replace("Name: ", ""));
+        def = new StringBuilder(def.toString().replace("Age: ", ""));
+        def = new StringBuilder(def.toString().replace("Email: ", ""));
+        def = new StringBuilder(def.toString().replace("Phone: ", ""));
+        String[] result = def.toString().split("\n");
         return new Profile(result[0], Integer.valueOf(result[1]), result[2], Long.valueOf(result[3]));
     }
 
