@@ -7,6 +7,10 @@ import java.io.IOException;
 public class FileReader {
 
     public Profile getDataFromFile(File file) {
+        if (file == null) {
+            return new Profile();
+        }
+
         Profile p = new Profile();
         int isNext = 0;
         String name = "";
