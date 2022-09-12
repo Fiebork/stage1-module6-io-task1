@@ -2,6 +2,9 @@ package com.epam.mjc.io;
 
 import java.io.*;
 import java.io.IOException;
+import java.util.Arrays;
+
+
 
 
 public class FileReader {
@@ -10,61 +13,24 @@ public class FileReader {
         if (file == null) {
             return new Profile();
         }
-
-        Profile p = new Profile();
-        int isNext = 0;
-        String name = "";
-        String age = "";
-        String email = "";
-        String phone = "";
-
+        String def = "";
         try (java.io.FileReader fr = new java.io.FileReader(file))
         {
             int content;
             while ((content = fr.read()) != -1) {
-                if ((char) content == ' ' && isNext == 0) {
-                    isNext = 1;
-                } else if ((char) content == '\n' && isNext == 1) {
-                    isNext = 2;
-                } else if (isNext == 1) {
-                    name += (char) content;
-                }
-
-                else if ((char) content == ' ' && isNext == 2) {
-                    isNext = 3;
-                } else if ((char) content == '\n' && isNext == 3) {
-                    isNext = 4;
-                } else if (isNext == 3) {
-                    age += (char) content;
-                }
-
-                else if ((char) content == ' ' && isNext == 4) {
-                    isNext = 5;
-                } else if ((char) content == '\n' && isNext == 5) {
-                    isNext = 6;
-                } else if (isNext == 5) {
-                    email += (char) content;
-                }
-
-                else if ((char) content == ' ' && isNext == 6) {
-                    isNext = 7;
-                } else if ((char) content == '\n' && isNext == 7) {
-                    isNext = 8;
-                } else if (isNext == 7) {
-                    phone += (char) content;
+                if (content != 13) {
+                    def += (char) content;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-        p.setName(name);
-        p.setPhone(Long.valueOf(phone));
-        p.setAge(Integer.valueOf(age));
-        p.setEmail(email);
-
-        return p;
+        def = def.replaceAll("Name: ", "");
+        def = def.replaceAll("Age: ", "");
+        def = def.replaceAll("Email: ", "");
+        def = def.replaceAll("Phone: ", "");
+        String[] result = def.split("\n");
+        return new Profile(result[0], Integer.valueOf(result[1]), result[2], Long.valueOf(result[3]));
     }
 
     public static void main(String[] args) {
