@@ -25,10 +25,10 @@ public class FileReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        def = def.replaceAll("Name: ", "");
-        def = def.replaceAll("Age: ", "");
-        def = def.replaceAll("Email: ", "");
-        def = def.replaceAll("Phone: ", "");
+        def = def.replace("Name: ", "");
+        def = def.replace("Age: ", "");
+        def = def.replace("Email: ", "");
+        def = def.replace("Phone: ", "");
         String[] result = def.split("\n");
         return new Profile(result[0], Integer.valueOf(result[1]), result[2], Long.valueOf(result[3]));
     }
