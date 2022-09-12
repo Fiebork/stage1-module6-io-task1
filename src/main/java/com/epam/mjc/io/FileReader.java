@@ -60,15 +60,17 @@ public class FileReader {
         if (age == null || age.equals("") || age.equals("  ") || age.equals(" "))  {
             p.setAge(0);
         } else {
-            p.setAge(Integer.valueOf(age.substring(0, age.length() - 1)));
+            p.setAge(0);
+            //p.setAge(Integer.valueOf(age.substring(0, age.length() - 1)));
         }
 
         p.setEmail(email.substring(0, email.length() - 1));
 
         if (phone == null || phone.equals("") || phone.equals("  ") || phone.equals(" "))  {
-            p.setAge(0);
+            p.setPhone(0L);
         } else {
-            p.setPhone(Long.valueOf(phone.substring(0, phone.length() - 1)));
+            p.setPhone(0L);
+            //p.setPhone(Long.valueOf(phone.substring(0, phone.length() - 1)));
         }
 
         return p;
